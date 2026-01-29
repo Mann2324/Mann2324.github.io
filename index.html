@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Access Required</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .box {
+      background: #020617;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #22c55e;
+      color: #000;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .msg {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #f87171;
+    }
+    .note {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Enter to Continue</h2>
+  <p>Please enter your name and allow location access.</p>
+
+  <input type="text" id="name" placeholder="Your Name" required>
+
+  <button onclick="requestAccess()">Allow Location & Enter</button>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="note">
+    Location permission is mandatory to access this website.
+  </div>
+</div>
+
+<script>
+function requestAccess() {
+  const name = document.getElementById("name").value.trim();
+  const msg = document.getElementById("msg");
+
+  if (!name) {
+    msg.innerText = "Name is required.";
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    msg.innerText = "Geolocation is not supported on this device.";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const data = {
+        name: name,
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+        time: new Date().toISOString()
+      };
+
+      localStorage.setItem("accessData", JSON.stringify(data));
+      window.location.href = "home.html";
+    },
+    function(error) {
+      msg.innerText = "Location permission denied. Access blocked.";
+    },
+    { enableHighAccuracy: true }
+  );
+}
+</script>
+
+</body>
+</html>
