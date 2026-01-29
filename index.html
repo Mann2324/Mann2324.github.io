@@ -98,8 +98,21 @@ function requestAccess() {
         time: new Date().toISOString()
       };
 
-      localStorage.setItem("accessData", JSON.stringify(data));
-      window.location.href = "home.html";
+      fetch("https://script.google.com/macros/s/AKfycbypXJmgb2rgdBJVuDQ-Sk67G0J8tH_4DQXRnFaEgSjv8cpeyVmOrx85J5_h6nLwirpSAQ/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
+.then(() => {
+  localStorage.setItem("accessData", JSON.stringify(data));
+  window.location.href = "home.html";
+})
+.catch(() => {
+  alert("Error saving data. Try again.");
+});
+
     },
     function(error) {
       msg.innerText = "Location permission denied. Access blocked.";
@@ -111,3 +124,4 @@ function requestAccess() {
 
 </body>
 </html>
+
