@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mann Jani | Builder · Tech Developer · Investor · Entrepreneur</title>
+<title>Mann Jani | Builder · Tech Developer · Entrepreneur · Investor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Fonts -->
@@ -17,16 +17,12 @@
   --dark:#0b0b0c;
   --light:#e6e6e6;
 }
-
 body{
   margin:0;
   font-family:'Inter',sans-serif;
   background:radial-gradient(circle at top,#1a1a1a,var(--dark));
   color:var(--light);
-  overflow-x:hidden;
 }
-
-/* Containers */
 .container{
   max-width:1200px;
   margin:auto;
@@ -45,31 +41,27 @@ body{
   transform:translateY(0);
 }
 
-/* Profile */
+/* Profile photo */
 .profile-wrapper{
   display:flex;
   justify-content:center;
   margin-bottom:40px;
 }
 .profile-photo{
-  width:90%;
+  width:65%;
   max-width:360px;
   aspect-ratio:1/1;
-  border-radius:90%;
+  border-radius:50%;
   object-fit:cover;
-  border:2px solid rgba(201,162,93,0.5);
-  box-shadow:0 30px 80px rgba(0,0,0,0.85);
-  animation:float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
+  object-position:center 30%; /* FACE FIX */
+  border:2px solid rgba(201,162,93,0.45);
+  box-shadow:0 35px 90px rgba(0,0,0,0.85);
+  animation:float 6s ease-in-out infinite;
 }
 
-/* Animations */
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
-@keyframes glow{
-  0%,100%{box-shadow:0 30px 80px rgba(0,0,0,0.85)}
-  50%{box-shadow:0 35px 90px rgba(201,162,93,0.25)}
+  50%{transform:translateY(-10px)}
 }
 
 /* Typography */
@@ -89,10 +81,10 @@ h1{
   margin-bottom:30px;
 }
 p{
-  line-height:1.8;
+  line-height:1.9;
   color:#d0d0d0;
-  max-width:820px;
-  margin:0 auto 20px;
+  max-width:900px;
+  margin:0 auto 22px;
 }
 
 /* Social */
@@ -100,10 +92,6 @@ p{
   margin:0 14px;
   font-size:20px;
   color:var(--gold);
-  transition:transform .3s ease;
-}
-.social a:hover{
-  transform:translateY(-4px);
 }
 
 /* Sections */
@@ -113,25 +101,28 @@ p{
   margin-bottom:60px;
 }
 
-/* Grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:40px;
+/* Business cards */
+.business{
+  max-width:950px;
+  margin:0 auto 60px;
   text-align:left;
 }
-.item{
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
-}
-.item i{
+.business h3{
+  font-family:'Playfair Display',serif;
   color:var(--gold);
-  font-size:20px;
-  margin-top:4px;
+  margin-bottom:10px;
+}
+.business i{
+  color:var(--gold);
+  margin-right:8px;
 }
 
-/* Form */
+/* Contact form */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
 .form-box{
   background:rgba(255,255,255,0.04);
   padding:40px;
@@ -154,11 +145,6 @@ button{
   border-radius:8px;
   font-weight:500;
   cursor:pointer;
-  transition:all .3s ease;
-}
-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 25px rgba(201,162,93,.35);
 }
 
 /* Footer */
@@ -169,10 +155,10 @@ footer{
   border-top:1px solid #222;
 }
 
-/* Mobile */
 @media(max-width:900px){
   h1{font-size:40px;}
   .profile-photo{width:80%;}
+  .grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -186,35 +172,86 @@ footer{
   </div>
 
   <h1>Mann Jani</h1>
-  <div class="subtitle">Builder · Tech Developer · Investor · Entrepreneur</div>
-  <div class="tagline">Living simple. Building strong. Growing long-term.</div>
-  
-<div class="social">
-    <a href="https://instagram.com/iamjani11" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://wa.me/919510126567" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="mailto:janimann2324@gmail.com"><i class="fas fa-envelope"></i></a>
-</div>
-  <p>
-    I’m Mann Jani, based in Himatnagar, Gujarat. I am a Computer Engineer by
-    qualification and a builder by background, actively involved in real estate,
-    business development, and diversified investments.
-  </p>
-  <p>
-    I focus on owning assets, building systems, and creating sustainable income
-    streams with long-term clarity and discipline.
-  </p>
+  <div class="subtitle">Builder · Tech Developer · Entrepreneur · Investor</div>
+  <div class="tagline">Living a simple life with extraordinary ambition.</div>
 
- 
+  <p>
+    I am Mann Jani, a builder by background and a computer engineer by education.
+    My work spans real estate development, technology-driven solutions, asset
+    creation, and diversified business ventures. I focus on long-term value,
+    disciplined execution, and sustainable growth.
+  </p>
 </section>
 
-<!-- WHAT I DO -->
+<!-- BUSINESSES -->
 <section class="container fade-up">
-  <div class="section-title">What I Do</div>
-  <div class="grid">
-    <div class="item"><i class="fas fa-building"></i><p>Builder & Real Estate Developer</p></div>
-    <div class="item"><i class="fas fa-laptop-code"></i><p>Tech Developer & Digital Solutions</p></div>
-    <div class="item"><i class="fas fa-chart-line"></i><p>Investor & Asset Builder</p></div>
-    <div class="item"><i class="fas fa-briefcase"></i><p>Entrepreneur & Business Operator</p></div>
+  <div class="section-title">Businesses & Ventures</div>
+
+  <div class="business">
+    <h3><i class="fas fa-building"></i> Matangi Developer</h3>
+    <p>
+      Matangi Developer is a real estate development firm founded and led by me,
+      focused on residential and commercial construction projects. The company
+      emphasizes structured planning, quality execution, legal compliance, and
+      long-term asset value. Each project is approached with a clear vision of
+      sustainability, durability, and customer trust.
+    </p>
+    <p>
+      The flagship project, <strong>Matangi Residency</strong>, reflects this
+      philosophy by combining practical design, efficient use of space, and
+      long-term livability. The goal is not just construction, but value creation.
+    </p>
+  </div>
+
+  <div class="business">
+    <h3><i class="fas fa-laptop-code"></i> Matangi Infotech</h3>
+    <p>
+      Matangi Infotech is a technology-focused company providing software
+      development, digital solutions, and IT-enabled services. The company
+      supports businesses in adopting modern technology to improve efficiency,
+      scalability, and digital presence.
+    </p>
+    <p>
+      With my background in computer engineering, the focus is on building
+      practical, secure, and scalable solutions rather than experimental systems.
+    </p>
+  </div>
+
+  <div class="business">
+    <h3><i class="fas fa-home"></i> Balaji Developer</h3>
+    <p>
+      Balaji Developer manages owned real estate assets and rental properties.
+      This venture focuses on acquiring, maintaining, and operating income-
+      generating properties that deliver stable and predictable cash flow.
+    </p>
+  </div>
+
+  <div class="business">
+    <h3><i class="fas fa-briefcase"></i> 10% Enterprise</h3>
+    <p>
+      10% Enterprise is a problem-solving and solutions company operating on a
+      transparent ten percent commission-based model. The company handles a wide
+      range of requirements including legal coordination, documentation support,
+      operational execution, and business facilitation.
+    </p>
+  </div>
+
+  <div class="business">
+    <h3><i class="fas fa-coins"></i> 21Million</h3>
+    <p>
+      21Million is a cryptocurrency and digital asset venture focused on emerging
+      financial technologies. The objective is to study, invest, and participate
+      in future-ready financial systems with calculated risk and long-term vision.
+    </p>
+  </div>
+
+  <div class="business">
+    <h3><i class="fas fa-recycle"></i> Recycling Business</h3>
+    <p>
+      This venture focuses on recycling operations and responsible waste
+      management. The goal is to combine business viability with environmental
+      responsibility, supporting sustainable practices at a local level.
+    </p>
   </div>
 </section>
 
@@ -230,7 +267,7 @@ footer{
       <button type="submit">Send Message</button>
     </form>
 
-    <div>
+    <div style="text-align:left;">
       <p><i class="fas fa-map-marker-alt" style="color:var(--gold)"></i> Himatnagar, Gujarat</p>
       <p><i class="fas fa-envelope" style="color:var(--gold)"></i> janimann2324@gmail.com</p>
       <p><i class="fab fa-instagram" style="color:var(--gold)"></i> @iamjani11</p>
@@ -249,11 +286,8 @@ const observer=new IntersectionObserver(entries=>{
     if(e.isIntersecting){e.target.classList.add('show')}
   })
 },{threshold:0.15});
-
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 </script>
 
 </body>
 </html>
-
-
