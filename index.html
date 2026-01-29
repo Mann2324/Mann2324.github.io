@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mann Jani | Entrepreneur</title>
+  <meta charset="UTF-8">
+  <title>Mann Jani | Entrepreneur · Builder · Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0b0b0b;
-      color: #f5f5f5;
+      background: #0c0c0c;
+      color: #eaeaea;
     }
 
-    a { text-decoration: none; color: inherit; }
+    a {
+      color: #c7a24b;
+      text-decoration: none;
+    }
 
     .container {
       width: 90%;
@@ -27,205 +30,219 @@
       margin: auto;
     }
 
-    /* HERO */
-    .hero {
+    header {
+      min-height: 100vh;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      padding: 80px 0;
-      gap: 40px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
     }
 
     .hero img {
-      width: 320px;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(212,175,55,0.25);
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
     }
 
-    .hero h1 {
+    h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      margin: 0;
+      font-size: 54px;
+      margin-bottom: 12px;
     }
 
-    .hero p {
-      max-width: 500px;
-      color: #cfcfcf;
-      margin: 15px 0 25px;
-      line-height: 1.6;
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: #c7a24b;
+      margin-bottom: 24px;
+      font-size: 32px;
     }
 
-    .social a {
-      margin-right: 15px;
-      font-size: 1.2rem;
-      color: #d4af37;
-    }
-
-    /* SECTION */
     section {
-      padding: 70px 0;
+      padding: 100px 0;
       border-top: 1px solid #1f1f1f;
     }
 
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      text-align: center;
+    .subtitle {
+      font-size: 18px;
+      color: #b0b0b0;
+      line-height: 1.7;
+      max-width: 540px;
     }
 
-    /* GRID */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
     }
 
     .card {
-      background: #141414;
-      padding: 25px;
-      border-radius: 14px;
-      transition: 0.3s;
+      background: linear-gradient(180deg, #121212, #0d0d0d);
+      padding: 34px;
+      border-radius: 18px;
       border: 1px solid #1f1f1f;
+      transition: all 0.4s ease;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      border-color: #d4af37;
-    }
-
-    .card i {
-      font-size: 1.8rem;
-      color: #d4af37;
-      margin-bottom: 15px;
+      border-color: #c7a24b;
     }
 
     .card h3 {
-      margin: 10px 0;
-      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 14px;
     }
 
-    .card p {
-      font-size: 0.95rem;
-      color: #c9c9c9;
-      line-height: 1.5;
-    }
-
-    /* CONTACT */
-    .contact {
+    footer {
+      padding: 60px 0;
       text-align: center;
-    }
-
-    .contact p {
-      margin: 10px 0;
-      font-size: 1rem;
-    }
-
-    .footer {
-      padding: 30px 0;
-      text-align: center;
+      background: #080808;
+      border-top: 1px solid #1f1f1f;
+      font-size: 14px;
       color: #888;
-      font-size: 0.9rem;
     }
 
-    @media(max-width:768px){
-      .hero h1 { font-size: 2.4rem; }
+    .whatsapp {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #1f8f4a;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+    }
+
+    @media(max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      h1 { font-size: 44px; }
     }
   </style>
 </head>
+
 <body>
 
-<div class="container">
+<a class="whatsapp" href="https://wa.me/919510126567" target="_blank">W</a>
 
-  <!-- HERO -->
+<header class="container">
   <div class="hero">
-    <img src="profile.jpg" alt="Mann Jani">
     <div>
       <h1>Mann Jani</h1>
-      <p>
-        Builder by background, Computer Engineer by education, and Entrepreneur by mindset.
-        Building value across real estate, technology, investments, and services.
+      <h2>Entrepreneur · Builder · Investor</h2>
+      <p class="subtitle">
+        Building long-term value across real estate, technology, and diversified ventures
+        with a disciplined, structured, and growth-oriented approach.
       </p>
-      <div class="social">
-        <a href="https://instagram.com/iamjani11" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="tel:9510126567"><i class="fas fa-phone"></i></a>
-        <a href="mailto:janimann2324@gmail.com"><i class="fas fa-envelope"></i></a>
-      </div>
     </div>
+    <img src="mann-jani.jpg" alt="Mann Jani">
   </div>
+</header>
 
-  <!-- BUSINESSES -->
-  <section>
-    <h2>Businesses & Ventures</h2>
-    <div class="grid">
+<section class="container">
+  <h2>About</h2>
+  <p>
+    I am Mann Jani, a computer engineer by education and an entrepreneur by vision.
+    Coming from a strong builder background, I integrate traditional real estate expertise
+    with modern technology, investment discipline, and operational clarity.
+  </p>
+  <p>
+    My objective is to create sustainable businesses, long-term assets, and scalable systems
+    that deliver value while maintaining transparency, trust, and execution excellence.
+  </p>
+</section>
 
-      <div class="card">
-        <i class="fas fa-building"></i>
-        <h3>Matangi Developer</h3>
-        <p>Founder & CEO – Real estate development firm. Flagship project: Matangi Residency.</p>
-      </div>
+<section class="container">
+  <h2>Companies & Ventures</h2>
+  <div class="grid">
 
-      <div class="card">
-        <i class="fas fa-laptop-code"></i>
-        <h3>Matangi Infotech</h3>
-        <p>Technology & software solutions company.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-handshake"></i>
-        <h3>10% Enterprise</h3>
-        <p>A-to-Z problem-solving company operating on a 10% commission model.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-home"></i>
-        <h3>Balaji Developer</h3>
-        <p>Property ownership and rental income portfolio.</p>
-      </div>
-
-      <div class="card">
-        <i class="fab fa-bitcoin"></i>
-        <h3>21Million</h3>
-        <p>Cryptocurrency and digital asset venture.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-recycle"></i>
-        <h3>Recycling Business</h3>
-        <p>Sustainable waste management and recycling operations.</p>
-      </div>
-
+    <div class="card">
+      <h3>Matangi Developer</h3>
+      <p>
+        Founder and Chief Executive Officer of a real estate development firm focused on
+        residential and commercial projects. The company emphasizes structured planning,
+        quality construction, and long-term asset value.
+      </p>
+      <p><strong>Flagship Project:</strong> Matangi Residency</p>
     </div>
-  </section>
 
-  <!-- UPCOMING -->
-  <section>
-    <h2>Upcoming Ventures</h2>
-    <div class="grid">
-
-      <div class="card"><i class="fas fa-charging-station"></i><h3>EV Charging Station</h3></div>
-      <div class="card"><i class="fas fa-waffle"></i><h3>Waffle.co</h3></div>
-      <div class="card"><i class="fas fa-car"></i><h3>Car Washing Station</h3></div>
-      <div class="card"><i class="fas fa-pills"></i><h3>Medical Store</h3></div>
-      <div class="card"><i class="fas fa-gamepad"></i><h3>PlayStation Game Zone</h3></div>
-      <div class="card"><i class="fas fa-soap"></i><h3>Laundry Shop</h3></div>
-
+    <div class="card">
+      <h3>Matangi Infotech</h3>
+      <p>
+        A technology and software solutions company providing digital platforms,
+        development services, and modern IT-driven business solutions.
+      </p>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact">
-    <h2>Contact</h2>
-    <p><i class="fas fa-location-dot"></i> Himatnagar – Ahmedabad</p>
-    <p><i class="fas fa-phone"></i> 9510126567</p>
-    <p><i class="fas fa-envelope"></i> janimann2324@gmail.com</p>
-  </section>
+    <div class="card">
+      <h3>Balaji Developer</h3>
+      <p>
+        A property ownership and rental-focused business managing long-term real estate assets
+        and generating stable rental income.
+      </p>
+    </div>
 
-  <div class="footer">
-    © 2026 Mann Jani — Living Simple. Building Extraordinary.
+    <div class="card">
+      <h3>10% Enterprise</h3>
+      <p>
+        A unique A-to-Z solutions company that handles diverse requirements and problem-solving
+        needs through a transparent 10 percent commission-based model, including legal and
+        operational matters.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>21Million</h3>
+      <p>
+        A cryptocurrency and digital asset venture focused on emerging financial technologies
+        and future-ready investment models.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Recycling Business</h3>
+      <p>
+        A sustainability-driven venture focused on recycling operations and responsible
+        waste management to support environmental balance.
+      </p>
+    </div>
+
   </div>
+</section>
 
-</div>
+<section class="container">
+  <h2>Upcoming Ventures</h2>
+  <div class="grid">
+    <div class="card">Electric Vehicle Charging Infrastructure</div>
+    <div class="card">Waffle.co – Food and Beverage Concept</div>
+    <div class="card">Automated Car Washing Facility</div>
+    <div class="card">Retail Medical Store</div>
+    <div class="card">Premium PlayStation Game House</div>
+    <div class="card">Professional Laundry and Garment Care</div>
+  </div>
+</section>
+
+<section class="container">
+  <h2>Contact</h2>
+  <p>Location: Himatnagar – Ahmedabad</p>
+  <p>Phone: 9510126567</p>
+  <p>Email: janimann2324@gmail.com</p>
+  <p>Instagram: iamjani11</p>
+</section>
+
+<footer>
+  © 2026 Mann Jani. All rights reserved.
+</footer>
 
 </body>
 </html>
