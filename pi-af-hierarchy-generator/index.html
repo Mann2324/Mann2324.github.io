@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PI AF Hierarchy Generator | Matangi Infotech</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+:root{--navy:#102a43;--blue:#1769aa;--ink:#172b4d;--muted:#64748b;--line:#dbe4ee;--bg:#f3f6fa;--green:#16835d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(120deg,#102a43,#174a70);color:white;padding:28px 20px 25px;text-align:center;box-shadow:0 5px 20px #102a4320}
+.brandmark{width:48px;height:48px;border:1px solid #ffffff65;border-radius:14px;display:inline-grid;place-items:center;font-size:25px;margin-bottom:8px;background:#ffffff12}
+h1{font-size:clamp(22px,4vw,32px);letter-spacing:.04em;margin:0;font-weight:800}.powered{font-size:13px;letter-spacing:.16em;color:#9ed0ff;font-weight:700;margin-top:5px}
+.sub{color:#d5e4f1;margin:10px auto 0;max-width:680px}
+main{max-width:1100px;margin:28px auto;padding:0 18px 50px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 20px #1b36500a}
+.step{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:18px}.num{display:inline-grid;place-items:center;background:#e8f2fb;color:#1769aa;border-radius:9px;width:30px;height:30px;font-weight:800}
+.muted{color:var(--muted);font-size:13px}.upload{border:2px dashed #b8c9d9;border-radius:12px;padding:25px;text-align:center;background:#f8fbfe}
+input[type=file]{max-width:100%}select,input[type=text]{border:1px solid #cbd5e1;border-radius:9px;padding:10px 12px;font:inherit;background:white;color:var(--ink)}button{border:0;border-radius:9px;padding:10px 15px;background:var(--blue);color:white;font-weight:700;cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:#e8eef5;color:#29445f}.danger{background:#fff0f0;color:#a33}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row>label{font-weight:650}.grow{flex:1;min-width:220px}
+#sequence{display:grid;gap:8px;margin-top:14px}.field{display:flex;gap:9px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:#fff}.field .handle{color:#94a3b8}.field .fname{flex:1;min-width:130px;font-weight:600}.field small{color:var(--muted)}.field input{accent-color:var(--blue)}
+.actions{display:flex;gap:6px}.actions button{padding:5px 9px}.status{padding:12px;border-radius:10px;background:#eff6ff;color:#24527a;margin-top:12px}.status.error{background:#fff1f0;color:#a33}.status.good{background:#eaf8f1;color:#176b4d}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:#f6f9fc;position:sticky;top:0}.tablewrap{overflow:auto;max-height:350px;border:1px solid var(--line);border-radius:10px}
+.hidden{display:none!important}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#eaf8f1;color:#176b4d;font-size:12px;font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:600px){.panel{padding:16px}.field{flex-wrap:wrap}.field .fname{min-width:100px}.row>*{width:100%}.actions{width:auto}.step{font-size:16px}}
+</style></head>
+<body>
+<header><div class="brandmark" aria-hidden="true">⌘</div><h1>PI AF HIERARCHY GENERATOR</h1><div class="powered">POWERED BY MATANGI INFOTECH</div><p class="sub">Convert raw Excel hierarchy columns into PI AF Element import rows.</p></header>
+<main>
+<section class="panel">
+<h2 class="step"><span class="num">1</span> Upload raw Excel workbook</h2>
+<div class="upload"><div style="font-size:30px">📊</div><strong>Select your source workbook</strong><p class="muted">Excel .xlsx, .xls or .xlsm · Processed locally in your browser</p><input id="file" type="file" accept=".xlsx,.xls,.xlsm"></div>
+<div id="sheetArea" class="row hidden" style="margin-top:16px"><label for="sheet">Worksheet</label><select id="sheet" class="grow"></select><span id="fileInfo" class="muted"></span></div>
+<div id="uploadStatus" class="muted" style="margin-top:10px">Choose a workbook to begin.</div>
+</section>
+<section class="panel hidden" id="mappingPanel">
+<h2 class="step"><span class="num">2</span> Arrange hierarchy column sequence</h2>
+<p class="muted">Headers are read automatically. Tick only columns that belong in the Element hierarchy, then move them up or down to set the exact parent-to-child order. Description, Tag No and other non-hierarchy columns should remain unticked.</p>
+<div class="row" style="margin:15px 0"><label for="root">Root parent path</label><input id="root" type="text" value="DFPCL" class="grow"><span class="muted">Example: DFPCL</span></div>
+<div class="row"><span id="detectedCount" class="pill">0 headers detected</span><button id="allOn" class="secondary">Select all detected</button><button id="allOff" class="secondary">Clear selection</button></div>
+<div id="sequence"></div>
+<div class="muted" style="margin-top:10px">Tip: use ↑ and ↓ to reorder. The first selected column becomes the first Element below the root.</div>
+</section>
+<section class="panel hidden" id="previewPanel">
+<h2 class="step"><span class="num">3</span> Preview generated hierarchy</h2>
+<div id="summary" class="muted"></div><div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Selected(x)</th><th>Parent</th><th>Name</th><th>ObjectType</th></tr></thead><tbody id="previewBody"></tbody></table></div>
+<div id="generationStatus" class="status hidden"></div>
+<div class="row" style="margin-top:16px"><button id="generate">Generate / Refresh Preview</button><button id="download" disabled>Download PI AF Excel</button></div>
+</section>
+<section class="panel">
+<h2 class="step"><span class="num">4</span> Output format</h2>
+<p class="muted">The downloaded workbook contains exactly these columns, in this order:</p>
+<div class="tablewrap"><table><thead><tr><th>Selected(x)</th><th>Parent</th><th>Name</th><th>ObjectType</th></tr></thead><tbody><tr><td>x</td><td>DFPCL</td><td>PCL</td><td>Element</td></tr><tr><td>x</td><td>DFPCL\PCL</td><td>Taloja</td><td>Element</td></tr></tbody></table></div>
+</section>
+<footer>PI AF HIERARCHY GENERATOR · POWERED BY MATANGI INFOTECH<br>Excel data is processed in your browser and is not sent to a server.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);let workbook=null,rows=[],headers=[],fields=[],generated=[];
+const normalize=s=>String(s??'').trim().toLowerCase().replace(/[ _-]+/g,'');
+const ignored=/description|tagno|tagnumber|instrument|datatype|uom|unit|range|target|frequency|opc|controller|endpoint|nodeid|api|sql|comment|remark|attribute|selected|parent|objecttype|uniqueid/;
+const likely=/group|business|location|site|plantcode|plant|subplant|mainasset|area|asset|childasset|subchild|grandchild|section|unit|block|train|equipment|system|department|zone|building|floor|line|process/;
+function guess(h){let n=normalize(h);return likely.test(n)&&!ignored.test(n)}
+function loadSheet(name){const ws=workbook.Sheets[name];rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false});let hi=rows.findIndex(r=>r.some(c=>String(c??'').trim()!==''));if(hi<0)throw Error('The selected worksheet is empty.');headers=rows[hi].map((v,i)=>String(v??'').trim()||'Column '+(i+1));let body=rows.slice(hi+1).filter(r=>r.some(v=>String(v??'').trim()!==''));fields=headers.map((h,i)=>({header:h,index:i,active:guess(h)}));$('fileInfo').textContent=body.length+' data rows';$('detectedCount').textContent=headers.length+' headers detected · '+fields.filter(f=>f.active).length+' likely hierarchy';renderFields();$('mappingPanel').classList.remove('hidden');$('previewPanel').classList.remove('hidden');$('generationStatus').classList.add('hidden');generated=[];$('download').disabled=true;$('previewBody').innerHTML='';$('summary').textContent='Adjust the sequence, then generate a preview.';}
+function renderFields(){let root=$('sequence');root.innerHTML='';fields.forEach((f,i)=>{let d=document.createElement('div');d.className='field';let check=document.createElement('input');check.type='checkbox';check.checked=f.active;check.setAttribute('aria-label','Include '+f.header);check.onchange=()=>{f.active=check.checked;$('detectedCount').textContent=headers.length+' headers detected · '+fields.filter(x=>x.active).length+' selected';};let handle=document.createElement('span');handle.className='handle';handle.textContent='☷';let name=document.createElement('span');name.className='fname';name.textContent=f.header;let meta=document.createElement('small');meta.textContent='Column '+(f.index+1);let actions=document.createElement('div');actions.className='actions';let up=document.createElement('button');up.className='secondary';up.textContent='↑';up.disabled=i===0;up.title='Move up';up.onclick=()=>{[fields[i-1],fields[i]]=[fields[i],fields[i-1]];renderFields();};let down=document.createElement('button');down.className='secondary';down.textContent='↓';down.disabled=i===fields.length-1;down.title='Move down';down.onclick=()=>{[fields[i+1],fields[i]]=[fields[i],fields[i+1]];renderFields();};actions.append(up,down);d.append(check,handle,name,meta,actions);root.append(d);});}
+function build(){let chosen=fields.filter(f=>f.active);if(!chosen.length)throw Error('Select at least one hierarchy column.');let root=$('root').value.trim();if(!root)throw Error('Enter the root parent path (for example DFPCL).');let map=new Map(),out=[];for(let ri=0;ri<rows.length;ri++){let r=rows[ri];if(!r||!r.some(v=>String(v??'').trim()!==''))continue;if(ri===0){};let parent=root;for(const f of chosen){let name=String(r[f.index]??'').trim();if(!name)continue;let key=parent+'\\'+name;if(!map.has(key)){map.set(key,true);out.push({'Selected(x)':'x','Parent':parent,'Name':name,'ObjectType':'Element'});}parent=key;}}
+if(!out.length)throw Error('No hierarchy values found. Check the selected columns and worksheet header row.');return out;}
+function makePreview(){try{generated=build();$('previewBody').innerHTML='';generated.slice(0,150).forEach(o=>{let tr=document.createElement('tr');Object.values(o).forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.append(td)});$('previewBody').append(tr)});$('summary').textContent=generated.length+' unique Elements generated. '+(generated.length>150?'Showing first 150 rows.':'');$('generationStatus').className='status good';$('generationStatus').textContent='Preview ready. Check the parent paths and sequence before downloading.';$('generationStatus').classList.remove('hidden');$('download').disabled=false;}catch(e){$('generationStatus').className='status error';$('generationStatus').textContent=e.message;$('generationStatus').classList.remove('hidden');$('download').disabled=true;}}
+$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;$('uploadStatus').textContent='Reading workbook…';try{let data=await f.arrayBuffer();workbook=XLSX.read(data,{type:'array'});$('sheet').innerHTML='';workbook.SheetNames.forEach(n=>{let o=document.createElement('option');o.value=n;o.textContent=n;$('sheet').append(o)});$('sheetArea').classList.remove('hidden');loadSheet(workbook.SheetNames[0]);$('uploadStatus').textContent='Workbook loaded successfully.';}catch(err){$('uploadStatus').textContent='Could not read workbook: '+err.message;}});
+$('sheet').addEventListener('change',()=>{try{loadSheet($('sheet').value);$('uploadStatus').textContent='Worksheet loaded.'}catch(e){$('uploadStatus').textContent=e.message}});
+$('allOn').onclick=()=>{fields.forEach(f=>f.active=true);renderFields();$('detectedCount').textContent=headers.length+' headers detected · '+fields.length+' selected';};
+$('allOff').onclick=()=>{fields.forEach(f=>f.active=false);renderFields();$('detectedCount').textContent=headers.length+' headers detected · 0 selected';};
+$('generate').onclick=makePreview;
+$('download').onclick=()=>{if(!generated.length)return;let ws=XLSX.utils.json_to_sheet(generated,{header:['Selected(x)','Parent','Name','ObjectType']});ws['!cols']=[{wch:14},{wch:90},{wch:35},{wch:16}];let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'AF Elements');XLSX.writeFile(wb,'PI_AF_Element_Hierarchy.xlsx');};
+</script></body></html>
