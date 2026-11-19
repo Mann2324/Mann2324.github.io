@@ -11,7 +11,7 @@ header{background:linear-gradient(120deg,#102a43,#174a70);color:white;padding:28
 .brandmark{width:48px;height:48px;border:1px solid #ffffff65;border-radius:14px;display:inline-grid;place-items:center;font-size:25px;margin-bottom:8px;background:#ffffff12}
 h1{font-size:clamp(22px,4vw,32px);letter-spacing:.04em;margin:0;font-weight:800}.powered{font-size:13px;letter-spacing:.16em;color:#9ed0ff;font-weight:700;margin-top:5px}
 .sub{color:#d5e4f1;margin:10px auto 0;max-width:680px}
-main{max-width:1100px;margin:28px auto;padding:0 18px 50px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 20px #1b36500a}
+main{max-width:1100px;margin:28px auto;padding:0 18px 50px}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.nav a{padding:9px 13px;border-radius:9px;text-decoration:none;background:white;border:1px solid var(--line);color:var(--blue);font-weight:700}.nav a.active{background:var(--blue);color:white}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 20px #1b36500a}
 .step{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:18px}.num{display:inline-grid;place-items:center;background:#e8f2fb;color:#1769aa;border-radius:9px;width:30px;height:30px;font-weight:800}
 .muted{color:var(--muted);font-size:13px}.upload{border:2px dashed #b8c9d9;border-radius:12px;padding:25px;text-align:center;background:#f8fbfe}
 input[type=file]{max-width:100%}select,input[type=text]{border:1px solid #cbd5e1;border-radius:9px;padding:10px 12px;font:inherit;background:white;color:var(--ink)}button{border:0;border-radius:9px;padding:10px 15px;background:var(--blue);color:white;font-weight:700;cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:#e8eef5;color:#29445f}.danger{background:#fff0f0;color:#a33}
@@ -26,6 +26,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
 <body>
 <header><div class="brandmark" aria-hidden="true">⌘</div><h1>PI AF HIERARCHY GENERATOR</h1><div class="powered">POWERED BY MATANGI INFOTECH</div><p class="sub">Convert raw Excel hierarchy columns into PI AF Element import rows.</p></header>
 <main>
+<nav class="nav"><a class="active" href="./index.html">PI AF Hierarchy Generator</a><a href="./abbreviation-generator.html">Abbreviation Generator</a></nav>
 <section class="panel">
 <h2 class="step"><span class="num">1</span> Upload raw Excel workbook</h2>
 <div class="upload"><div style="font-size:30px">📊</div><strong>Select your source workbook</strong><p class="muted">Excel .xlsx, .xls or .xlsm · Processed locally in your browser</p><input id="file" type="file" accept=".xlsx,.xls,.xlsm"></div>
